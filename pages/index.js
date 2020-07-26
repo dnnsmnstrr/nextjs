@@ -1,9 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import ReactLifeTimeline from 'react-life-timeline'
-import events from '../events.json'
-
 const Home = () => (
   <div className="container">
     <Head>
