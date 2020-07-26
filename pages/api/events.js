@@ -5,7 +5,7 @@ export default (req, res) => {
   const origin = req.headers.origin
   const allowedOrigins = ['http://localhost:3000', 'http://localhost:9000']
   if (allowedOrigins.indexOf(origin) > -1) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Origin', origin)
   }
   res.json(events)
 }
