@@ -4,7 +4,6 @@ import LifeTimeline from '../components/LifeTimeline'
 
 export async function getStaticProps(context) {
   const response = await fetch('https://next.muensterer.xyz/api/events')
-
   const events = await response.json()
   return {
     props: {events}, // will be passed to the page component as props
