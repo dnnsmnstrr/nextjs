@@ -1,20 +1,21 @@
 import React from 'react'
 import Link from 'next/link'
 import LifeTimeline from '../components/LifeTimeline'
+import events from '../events.json'
 
-// export async function getStaticProps(context) {
-//   const response = await fetch('https://next.muensterer.xyz/api/events')
-//   console.log('response', response)
-//   const events = await response.json()
-//   return {
-//     props: {events}, // will be passed to the page component as props
-//   }
-// }
+export async function getStaticProps (context) {
+  const response = await fetch('https://next.muensterer.xyz/api/events')
+  console.log('response', response)
+  const events = await response.json()
+  return {
+    props: { events }
+  }
+}
 
-export default function Life ({ events = [] }) {
+export default function Life ({ eventss = [] }) {
+
   return (
     <div>
-      <div>About us</div>
       <div>
         Back to{' '}
         <Link href="/" as={process.env.BACKEND_URL || '' + '/'}>

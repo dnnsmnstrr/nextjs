@@ -30,35 +30,53 @@
     "date_end": "2012-07-30T00:00:00.000Z",
     "title": "Lives in Markleeberg (close to Leipzig), Germany.",
     "city": "Markkleeberg, Germany",
-    "color": "#F7EB54"
+    "color": "#286724"
   },
   {
     "date_start": "2012-09-01T00:00:00.000Z",
     "date_end": "2015-05-30T00:00:00.000Z",
     "title": "Visits the German International School New York.",
     "city": "New Rochelle, NY",
-    "color": "#1D226D"
+    "color": "#1D226D",
+    "url": "https://www.gisny.org/"
+  },
+  {
+    "date_start": "2015-10-01T00:00:00.000Z",
+    "date_end": "2016-04-01T00:00:00.000Z",
+    "title": "FSJ at the Behindertenseelsorge Mainz",
+    "city": "Mainz, Germany",
+    "color": "#A70031",
+    "url": "https://bistummainz.de/seelsorge/behindertenseelsorge/"
   },
   {
     "date_start": "2016-10-15T00:00:00.000Z",
     "date_end": "2017-08-30T00:00:00.000Z",
     "title": "Studies Engineering Sciences at TUM.",
     "city": "Garching, Germany",
-    "color": "#2459A1"
+    "color": "#2459A1",
+    "url": "https://www.mse.tum.de/startseite/"
   },
   {
     "date_start": "2017-10-20T00:00:00.000Z",
     "date_end": "2018-06-30T00:00:00.000Z",
-    "title": "Attends the Apple Developer Academy in Naples, Italy.",
-    "color": "#F500F7"
+    "title": "Attends the Apple Developer Academy",
+    "color": "#2351D5",
+    "city": "Naples, Italy",
+    "url": "https://www.developeracademy.unina.it/en/"
   },
   {
     "date_start": "2018-10-15T00:00:00.000Z",
     "date_end": "2019-04-01T00:00:00.000Z",
-    "title": "Studies Computer Science at TU Darmstadt"
+    "title": "Studies Computer Science at TU Darmstadt",
+    "city": "Wiesbaden, Germany",
+    "color": "#D4DC1F"
   },
   {
     "date_start": "2019-08-01T00:00:00.000Z",
-    "title": "Begins his apprenticeship at hpm."
+    "title": "Apprenticeship at hpm.",
+    "city": "Wiesbaden, Germany",
+    "color": "#0F81FD",
+    "ongoing": "true",
+    "url": "https://hpm.agency"
   }
 ]

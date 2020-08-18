@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
-const LifeTimeline = ({ subject, events = [], birthday_color = '#F89542', project_days = 200, ...props}) => {
+const LifeTimeline = ({ subject, events = [], birthday_color = 'teal', project_days = 200, defaultEventColor = '#1AA9FF', ...props}) => {
   const [loaded, setLoaded] = useState(false)
   const [lookup, setLookup] = useState({})
   const [lastEventDate, setLastEventDate] = useState(new Date())
@@ -38,10 +38,14 @@ const LifeTimeline = ({ subject, events = [], birthday_color = '#F89542', projec
     }, [events])
 
 	function print_date(date) {
-		var d = date.getDate();
+		var day = date.getDate();
 		var month = date.getMonth() + 1;
-		var day = d<10? '0'+d:''+d;
-		if (month < 10) month = '0'+month;
+    if (day < 10) {
+      day = '0'+day
+    }
+		if (month < 10) {
+      month = '0'+month
+    };
 		return date.getFullYear()+"-"+month+"-"+day;
 	}
 
@@ -133,6 +137,12 @@ const LifeTimeline = ({ subject, events = [], birthday_color = '#F89542', projec
 		}
 	}
 
+  const handleClick = (url) => () => {
+    if (url) {
+      window.open(url, "_blank")
+    }
+  }
+
 	function render_week(date_start, date_end) {
 		let date = print_date(date_start)
 		let res = lookup[date]
@@ -145,14 +155,15 @@ const LifeTimeline = ({ subject, events = [], birthday_color = '#F89542', projec
 		}
 		let future = date_start > today;
 		let st = {};
-		if (events.length > 0) st.backgroundColor = color || '#1AA9FF';
+		if (events.length > 0) st.backgroundColor = color || defaultEventColor;
 		let tips = [date].concat(events.map((e) => {
 			return e.title;
 		}));
+    let { url = '' } = events.find(({url}) => url) || {}
 		let cls = 'week';
 		if (future) cls += ' future';
 		if (single) _single = <span className="singleEvents"></span>;
-		return <div className={cls} key={date} style={st} data-tip={tips.join(', ')}>{_single}</div>;
+		return <div className={cls} key={date} style={st} data-tip={tips.join(', ')} onClick={handleClick(url)}>{_single}</div>;
 	}
 
 	function render_all_weeks() {
