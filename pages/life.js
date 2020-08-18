@@ -4,8 +4,8 @@ import LifeTimeline from '../components/LifeTimeline'
 import events from '../events.json'
 
 export async function getStaticProps (context) {
-  const response = await fetch('https://next.muensterer.xyz/api/events')
-  console.log('response', response)
+  const url = process.env.BACKEND_URL ? process.env.BACKEND_URL + '/api/events' : 'http://localhost:3000/api/events'
+  const response = await fetch(url)
   const events = await response.json()
   return {
     props: { events }

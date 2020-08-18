@@ -16,7 +16,7 @@ body {
   height: 15px;
   margin: 2px;
   padding: 0;
-  opacity: 0.7;
+  opacity: 0.5;
   background: #555;
   transition: .4s linear opacity;
   position: relative;
