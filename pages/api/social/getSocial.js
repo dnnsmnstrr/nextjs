@@ -4,7 +4,6 @@ export default async (type) => {
   const { files } = await response.json()
   const socials = JSON.parse(files['social.json'].content)
   if (type && socials) {
-    console.log('type', type)
     return socials[type]
   }
   return socials
