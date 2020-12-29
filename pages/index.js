@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import SwaggerUI from "swagger-ui-react"
-// import swagger from '../../docs/swagger.json'
+import swagger from '../docs/swagger.json'
 
 const Home = () => (
   <div className="container">
@@ -10,7 +10,7 @@ const Home = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <SwaggerUI spec={require('../public/swagger.json')} />
+    <SwaggerUI spec={swagger} />
 
     <main>
 
