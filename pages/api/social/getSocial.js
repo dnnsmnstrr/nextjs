@@ -1,10 +1,7 @@
-export default async (type) => {
-  const socialUrl = 'https://api.github.com/gists/09a2559a9a970de5e8e9e5c2eaf1183b'
-  const response = await fetch(socialUrl)
-  const { files } = await response.json()
-  const socials = JSON.parse(files['social.json'].content)
-  if (type && socials) {
-    return socials[type]
-  }
-  return socials
+import getGist from '../getGist'
+
+const SOCIAL_GIST = '09a2559a9a970de5e8e9e5c2eaf1183b'
+
+export default async (type = '') => {
+  return getGist(SOCIAL_GIST, type)
 }
