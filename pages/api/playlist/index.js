@@ -1,9 +1,7 @@
-import getGist from '../getGist'
-
-const PLAYLIST_GIST = '6d09e7d0d8696eb87460c7d5370bd079'
+import getPlaylist from './getPlaylist'
 
 export default async (req, res) => {
-  const playlist = await getGist(PLAYLIST_GIST)
+  const playlists = await getPlaylist()
   res.statusCode = 200
-  res.json(playlist)
+  res.json(playlists)
 }
