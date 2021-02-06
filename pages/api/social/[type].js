@@ -7,7 +7,8 @@ export default async (req, res) => {
     res.writeHead(307, { Location: social})
     res.end()
   } else {
+    const social = await getSocial()
     res.status(404)
-    res.send(`${type} not found`)
+    res.send(`${type} not found. try one of ${Object.keys(social)}`)
   }
 }
