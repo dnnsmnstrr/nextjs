@@ -6,5 +6,8 @@ export default async (req, res) => {
   if (social) {
     res.writeHead(307, { Location: social})
     res.end()
+  } else {
+    res.status(404)
+    res.send(`${type} not found`)
   }
 }
