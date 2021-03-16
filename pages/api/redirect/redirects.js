@@ -57,7 +57,7 @@ const getRedirect = async (query) => {
       console.log(e)
     }
   }
-  return foundRedirect && foundRedirect.url ? foundRedirect.url : DEFAULT_URL
+  return foundRedirect && foundRedirect.url ? foundRedirect.url : DEFAULT_URL + query
 }
 
 export {DEFAULT_URL, redirects, getRedirect}
