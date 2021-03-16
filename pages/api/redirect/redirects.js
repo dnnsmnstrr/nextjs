@@ -44,20 +44,29 @@ const redirects = [
     name: 'linkedin',
     url: 'https://www.linkedin.com/in/' + USERNAME_FULL,
     aliases: ['in', 'linked']
+  },
+  {
+    name: 'universe',
+    url: 'https://dnnsmnstrr.onuniverse.com/'
+  },
+  {
+    name: 'felix',
+    url: 'https://felixmuensterer.com',
+    aliases: ['lancemax', 'brother', 'dumbass']
   }
-
 ]
 
 const getRedirect = async (query) => {
   let foundRedirect = redirects.find(({name, aliases = []}) => name === query || aliases.includes(query))
   if (!foundRedirect) {
     try {
-      foundRedirect = await getSocial(query)
+      const url = await getSocial(query)
+      foundRedirect = {url}
     } catch (e) {
       console.log(e)
     }
   }
-  return foundRedirect && foundRedirect.url ? foundRedirect.url : DEFAULT_URL + query
+  return foundRedirect && foundRedirect.url ? foundRedirect.url : (DEFAULT_URL + query)
 }
 
 export {DEFAULT_URL, redirects, getRedirect}
