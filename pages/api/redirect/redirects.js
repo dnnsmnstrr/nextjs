@@ -53,6 +53,9 @@ const redirects = [
     name: 'felix',
     url: 'https://felixmuensterer.com',
     aliases: ['lancemax', 'brother', 'dumbass']
+  },
+  {
+    name: 'api', url: 'https://next.muensterer.xyz/api'
   }
 ]
 
