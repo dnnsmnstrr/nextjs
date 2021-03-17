@@ -11,6 +11,11 @@ const redirects = [
     aliases: ['main', 'root']
   },
   {
+    name: 'contact',
+    url: 'mailto:dennismuensterer@gmail.com',
+    aliases: ['email', 'message', 'mail']
+  },
+  {
     name: 'github',
     url: 'https://www.github.com/' + USERNAME_SHORT,
     aliases: ['gh', 'hub', 'code', 'repo', 'hack']
@@ -46,6 +51,16 @@ const redirects = [
     aliases: ['in', 'linked']
   },
   {
+    name: 'paypal',
+    url: 'https://www.paypal.com/paypalme/dennismuensterer',
+    aliases: ['pp', 'pay', 'donate', 'sendmoney', 'bbhmm']
+  },
+  {
+    name: 'youtube',
+    url: 'https://www.youtube.com/user/' + USERNAME_FULL,
+    aliases: ['yt', 'tube', 'videos']
+  },
+  {
     name: 'universe',
     url: 'https://dnnsmnstrr.onuniverse.com/'
   },
@@ -53,6 +68,21 @@ const redirects = [
     name: 'felix',
     url: 'https://felixmuensterer.com',
     aliases: ['lancemax', 'brother', 'dumbass']
+  },
+  {
+    name: 'wishlist',
+    url: 'https://www.amazon.de/hz/wishlist/ls/1Y2URDXEYY1JO',
+    aliases: ['wish', 'gift', 'birthday']
+  },
+  {
+    name: 'kickstarter',
+    url: 'https://www.kickstarter.com/profile/dennismuensterer',
+    aliases: ['ks', 'crowdfunding', 'backer']
+  },
+  {
+    name: 'steam',
+    url: 'https://steamcommunity.com/id/dnnsmnstrr/',
+    aliases: ['gaming', 'play', 'zocken']
   },
   {
     name: 'api', url: 'https://next.muensterer.xyz/api'
