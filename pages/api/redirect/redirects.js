@@ -84,12 +84,11 @@ const redirects = [
     url: 'https://steamcommunity.com/id/dnnsmnstrr/',
     aliases: ['gaming', 'play', 'zocken']
   },
-  {
-    name: 'api', url: 'https://next.muensterer.xyz/api'
-  }
+  { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer'},
+  { name: 'api', url: 'https://next.muensterer.xyz/api' }
 ]
 
-const getRedirect = async (query) => {
+const getRedirect = async (query, noReturn) => {
   let foundRedirect = redirects.find(({name, aliases = []}) => name === query || aliases.includes(query))
   if (!foundRedirect) {
     try {
@@ -99,7 +98,8 @@ const getRedirect = async (query) => {
       console.log(e)
     }
   }
-  return foundRedirect && foundRedirect.url ? foundRedirect.url : (DEFAULT_URL + query)
+  const fallback = noReturn ? DEFAULT_URL : (DEFAULT_URL + query)
+  return foundRedirect && foundRedirect.url ? foundRedirect.url : fallback
 }
 
 export {DEFAULT_URL, redirects, getRedirect}
