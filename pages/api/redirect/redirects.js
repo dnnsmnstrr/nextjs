@@ -41,6 +41,11 @@ const redirects = [
     aliases: ['tw', 'tweet', 'tweets']
   },
   {
+    name: 'facebook',
+    url: 'https://facebook.com/' + USERNAME_FULL,
+    aliases: ['fb', 'book', 'gesichtsbuch']
+  },
+  {
     name: 'making',
     url: 'https://www.tiktok.com/@dennis.makerer',
     aliases: ['makerer', 'make', 'maker', 'tiktok', 'tt', 'makermonday']
@@ -77,14 +82,17 @@ const redirects = [
   {
     name: 'kickstarter',
     url: 'https://www.kickstarter.com/profile/dennismuensterer',
-    aliases: ['ks', 'crowdfunding', 'backer']
+    aliases: ['ks', 'crowdfunding', 'backed']
   },
   {
     name: 'steam',
-    url: 'https://steamcommunity.com/id/dnnsmnstrr/',
+    url: 'https://steamcommunity.com/id/' + USERNAME_SHORT,
     aliases: ['gaming', 'play', 'zocken']
   },
-  { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer'},
+  { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
+  { name: 'telegram', url: 'https://t.me/' + USERNAME_SHORT },
+  { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
+  { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
   { name: 'api', url: 'https://next.muensterer.xyz/api' }
 ]
 
