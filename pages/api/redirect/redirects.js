@@ -93,7 +93,7 @@ const redirects = [
   { name: 'telegram', url: 'https://t.me/' + USERNAME_SHORT },
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
   { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
-  { name: 'api', url: 'https://next.muensterer.xyz/api' }
+  { name: 'api', url: 'https://next.muensterer.xyz/api' },
   { name: 'vr', url: 'https://us-east-1.sumerian.aws/f868ceb3bf6e46af8af7a7d65e852333.scene' }
 ]
 
