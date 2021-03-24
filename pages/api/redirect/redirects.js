@@ -89,12 +89,16 @@ const redirects = [
     url: 'https://steamcommunity.com/id/' + USERNAME_SHORT,
     aliases: ['gaming', 'play', 'zocken']
   },
+  {
+    name: 'slides',
+    url: 'https://slides.com/' + USERNAME_SHORT,
+    aliases: ['presentation', 'slide', 'present']
+  },
   { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
   { name: 'telegram', url: 'https://t.me/' + USERNAME_SHORT },
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
   { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
   { name: 'api', url: 'https://next.muensterer.xyz/api' },
-  { name: 'vr', url: 'https://us-east-1.sumerian.aws/f868ceb3bf6e46af8af7a7d65e852333.scene' }
 ]
 
 const getRedirect = async (query, noReturn) => {
