@@ -91,7 +91,7 @@ const redirects = [
   },
   {
     name: 'slides',
-    url: 'https://slides.com/' + USERNAME_SHORT,
+    url: 'https://slides.com/' + USERNAME_FULL,
     aliases: ['presentation', 'slide', 'present']
   },
   { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
