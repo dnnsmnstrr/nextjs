@@ -1,8 +1,9 @@
 import getSocial from '../social/getSocial'
 
-const DEFAULT_URL = "https://muensterer.xyz/"
+const DEFAULT_URL = 'https://muensterer.xyz/'
 const USERNAME_SHORT = 'dnnsmnstrr'
 const USERNAME_FULL = 'dennismuensterer'
+const EMAIL = 'dennismuensterer@gmail.com'
 
 const redirects = [
   {
@@ -12,18 +13,13 @@ const redirects = [
   },
   {
     name: 'contact',
-    url: 'mailto:dennismuensterer@gmail.com',
+    url: 'mailto:' + EMAIL,
     aliases: ['email', 'message', 'mail']
   },
   {
     name: 'github',
     url: 'https://www.github.com/' + USERNAME_SHORT,
     aliases: ['gh', 'hub', 'code', 'repo', 'hack']
-  },
-  {
-    name: 'zettelkasten',
-    url: DEFAULT_URL + 'zettelkasten',
-    aliases: ['zk', 'zettel', 'notes', 'slipbox', 'knowlege']
   },
   {
     name: 'music',
@@ -46,24 +42,29 @@ const redirects = [
     aliases: ['fb', 'book', 'gesichtsbuch']
   },
   {
-    name: 'making',
-    url: 'https://www.tiktok.com/@dennis.makerer',
-    aliases: ['makerer', 'make', 'maker', 'tiktok', 'tt', 'makermonday']
-  },
-  {
     name: 'linkedin',
     url: 'https://www.linkedin.com/in/' + USERNAME_FULL,
     aliases: ['in', 'linked']
   },
   {
     name: 'paypal',
-    url: 'https://www.paypal.com/paypalme/dennismuensterer',
-    aliases: ['pp', 'pay', 'donate', 'sendmoney', 'bbhmm']
+    url: 'https://www.paypal.com/paypalme/' + USERNAME_FULL,
+    aliases: ['pp', 'pay', 'donate', 'sendmoney', 'wheremymoneyat']
   },
   {
     name: 'youtube',
     url: 'https://www.youtube.com/user/' + USERNAME_FULL,
     aliases: ['yt', 'tube', 'videos']
+  },
+  {
+    name: 'zettelkasten',
+    url: DEFAULT_URL + 'zettelkasten',
+    aliases: ['zk', 'zettel', 'notes', 'slipbox', 'knowlege']
+  },
+  {
+    name: 'making',
+    url: 'https://www.tiktok.com/@dennis.makerer',
+    aliases: ['makerer', 'make', 'maker', 'tiktok', 'tt', 'makermonday']
   },
   {
     name: 'universe',
@@ -88,6 +89,11 @@ const redirects = [
     name: 'steam',
     url: 'https://steamcommunity.com/id/' + USERNAME_SHORT,
     aliases: ['gaming', 'play', 'zocken']
+  },
+  {
+    name: 'humblekeys',
+    url: DEFAULT_URL + 'humblekeys',
+    aliases: ['humble', 'keys', 'games', 'freegames']
   },
   {
     name: 'slides',
