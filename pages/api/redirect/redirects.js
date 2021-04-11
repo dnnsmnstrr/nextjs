@@ -105,6 +105,7 @@ const redirects = [
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
   { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
   { name: 'api', url: 'https://next.muensterer.xyz/api' },
+  { name: 'wg', url: 'https://www.wg-gesucht.de//8616536.html' },
 ]
 
 const getRedirect = async (query, noReturn) => {
