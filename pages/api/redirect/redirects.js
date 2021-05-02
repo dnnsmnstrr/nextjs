@@ -1,4 +1,5 @@
 import getSocial from '../social/getSocial'
+import getPlaylist from '../playlist/getPlaylist'
 
 const DEFAULT_URL = 'https://muensterer.xyz/'
 const USERNAME_SHORT = 'dnnsmnstrr'
@@ -22,9 +23,9 @@ const redirects = [
     aliases: ['gh', 'hub', 'code', 'repo', 'hack']
   },
   {
-    name: 'music',
+    name: 'spotify',
     url: 'https://open.spotify.com/user/' + USERNAME_FULL,
-    aliases: ['spotify', 'playlists', 'tunes', 'spot',]
+    aliases: ['music', 'sp', 'spot',]
   },
   {
     name: 'instagram',
@@ -100,26 +101,50 @@ const redirects = [
     url: 'https://slides.com/' + USERNAME_FULL,
     aliases: ['presentation', 'slide', 'present']
   },
+  {
+    name: 'telegram',
+    url: 'https://t.me/' + USERNAME_SHORT,
+    aliases: ['tg', 'tele']
+  },
+  { name: 'stickers', url: 'https://t.me/addstickers/memesterer' },
+  { name: 'masks', url: 'https://t.me/addstickers/maskerer' },
   { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
-  { name: 'telegram', url: 'https://t.me/' + USERNAME_SHORT },
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
   { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
   { name: 'api', url: 'https://next.muensterer.xyz/api' },
   { name: 'wg', url: 'https://www.wg-gesucht.de//8616536.html' },
 ]
 
-const getRedirect = async (query, noReturn) => {
-  let foundRedirect = redirects.find(({name, aliases = []}) => name === query || aliases.includes(query))
-  if (!foundRedirect) {
-    try {
-      const url = await getSocial(query)
-      foundRedirect = {url}
-    } catch (e) {
-      console.log(e)
-    }
+const getRedirect = async (route = [], noReturn) => {
+  const [ query, ...restRoute] = route
+  let redirect
+  switch (query) {
+    case 'random':
+      redirect = redirects[Math.floor(Math.random() * redirects.length)]
+      break
+    case 'social':
+      const social = await getSocial(restRoute[0])
+      return social
+    case 'playlist':
+      const playlist = await getPlaylist(restRoute[0])
+      if (playlist) return playlist
+      break
+    default:
+      redirect = redirects.find(({name, aliases = []}) => {
+        return name === query || aliases.includes(query)
+      })
+      if (!redirect) {
+        try {
+          const url = await getSocial(query)
+          redirect = {url}
+        } catch (e) {
+          console.log(e)
+        }
+      }
   }
+  // try a page on my website. if not found, it will redirect back here, therefore the 'noReturn' parameter
   const fallback = noReturn ? DEFAULT_URL : (DEFAULT_URL + query)
-  return foundRedirect && foundRedirect.url ? foundRedirect.url : fallback
+  return `${redirect && redirect.url ? redirect.url : fallback}${restRoute.reduce((previous, current) => previous + '/' + current, '')}`
 }
 
 export {DEFAULT_URL, redirects, getRedirect}
