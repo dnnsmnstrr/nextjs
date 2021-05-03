@@ -123,11 +123,18 @@ const getRedirect = async (route = [], noReturn) => {
       redirect = redirects[Math.floor(Math.random() * redirects.length)]
       break
     case 'social':
-      const social = await getSocial(restRoute[0])
-      return social
+      if (restRoute[0]){
+        const social = await getSocial(restRoute[0])
+        if (typeof(social) === 'string') {
+          return social
+        }
+      }
+      break
     case 'playlist':
-      const playlist = await getPlaylist(restRoute[0])
-      if (playlist) return playlist
+      if (restRoute[0]){
+        const playlist = await getPlaylist(restRoute[0])
+        if (playlist) return playlist
+      }
       break
     default:
       redirect = redirects.find(({name, aliases = []}) => {
