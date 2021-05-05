@@ -154,4 +154,22 @@ const getRedirect = async (route = [], noReturn) => {
   return `${redirect && redirect.url ? redirect.url : fallback}${restRoute.reduce((previous, current) => previous + '/' + current, '')}`
 }
 
+export default function handler(req, res) {
+  const { slug } = req.query
+  const body = `<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HTML basics</title>
+    </head>
+    <body>
+      <ul>
+        ${redirects.map((redirect) => '<li><a href="' + redirect.url + '" >' + redirect.name + '</a></li>').join('')}
+      </ul>
+    </body>
+</html>`
+
+  res.end(body, {headers: new Headers({'Content-Type': 'text/html'})})
+}
+
 export {DEFAULT_URL, redirects, getRedirect}
