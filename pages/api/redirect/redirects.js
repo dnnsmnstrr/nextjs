@@ -178,14 +178,11 @@ const getRedirectURL = ({url, name}, {route, query, noReturn, ...params} = {}) =
     return paramList.join('')
   }
   let path = route.join('/') + rebuildParams(params)
-  console.log('path', path)
-  console.log('url, name, query', url, name, query)
   if (url) {
     path = url + '/' + path
   } else if (name) {
     path = `${DEFAULT_URL}/${name}`
   } else {
-    console.log('query', query)
     // a failed redirect will end up back here, therefore the 'noReturn' parameter is used to avoid endless loops on redirect attempts
     path= `${DEFAULT_URL}/${!noReturn ? query : ''}`
   }
