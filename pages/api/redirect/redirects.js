@@ -2,15 +2,16 @@ import getSocial from '../social/getSocial'
 import getPlaylist from '../playlist/getPlaylist'
 import {
   DEFAULT_URL,
-  USERNAME: USERNAME_FULL
+  USERNAME,
   USERNAME_SHORT,
   EMAIL
 } from '../../../config'
 
+// no url means the redirect will be built out of the default url and the given name
 const redirects = [
   {
     name: 'homepage',
-    url: DEFAULT_URL,
+    url: DEFAULT_URL, //required to override default behaviour
     aliases: ['home', 'main', 'root']
   },
   {
@@ -21,11 +22,16 @@ const redirects = [
   {
     name: 'github',
     url: 'https://www.github.com/' + USERNAME_SHORT,
-    aliases: ['gh', 'hub', 'code', 'repo', 'hack']
+    aliases: ['gh', 'git', 'hub', 'code', 'repo', 'hack']
+  },
+  {
+    name: 'gitlab',
+    url: 'https://www.gitlab.com/' + USERNAME_SHORT,
+    aliases: ['gl', 'lab',]
   },
   {
     name: 'spotify',
-    url: 'https://open.spotify.com/user/' + USERNAME_FULL,
+    url: 'https://open.spotify.com/user/' + USERNAME,
     aliases: ['music', 'sp', 'spot',]
   },
   {
@@ -40,32 +46,30 @@ const redirects = [
   },
   {
     name: 'facebook',
-    url: 'https://facebook.com/' + USERNAME_FULL,
+    url: 'https://facebook.com/' + USERNAME,
     aliases: ['fb', 'book', 'gesichtsbuch']
   },
   {
     name: 'linkedin',
-    url: 'https://www.linkedin.com/in/' + USERNAME_FULL,
+    url: 'https://www.linkedin.com/in/' + USERNAME,
     aliases: ['in', 'linked']
   },
   {
     name: 'paypal',
-    url: 'https://www.paypal.com/paypalme/' + USERNAME_FULL,
+    url: 'https://www.paypal.com/paypalme/' + USERNAME,
     aliases: ['pp', 'pay', 'donate', 'sendmoney', 'wheremymoneyat']
   },
   {
     name: 'youtube',
-    url: 'https://www.youtube.com/user/' + USERNAME_FULL,
+    url: 'https://www.youtube.com/user/' + USERNAME,
     aliases: ['yt', 'tube', 'videos']
   },
   {
     name: 'zettelkasten',
-    url: DEFAULT_URL + 'zettelkasten',
     aliases: ['zk', 'zettel', 'notes', 'slipbox', 'knowlege']
   },
   {
     name: 'dotfiles',
-    url: DEFAULT_URL + 'dotfiles',
     aliases: ['df', 'setup', 'dot', 'config']
   },
   {
@@ -79,7 +83,7 @@ const redirects = [
   },
   {
     name: 'felix',
-    url: 'https://felixmuensterer.com',
+    url: 'https://fm-branding.de/',
     aliases: ['lancemax', 'brother', 'dumbass']
   },
   {
@@ -99,12 +103,11 @@ const redirects = [
   },
   {
     name: 'humblekeys',
-    url: DEFAULT_URL + 'humblekeys',
     aliases: ['humble', 'keys', 'games', 'freegames']
   },
   {
     name: 'slides',
-    url: 'https://slides.com/' + USERNAME_FULL,
+    url: 'https://slides.com/' + USERNAME,
     aliases: ['presentation', 'slide', 'present']
   },
   {
@@ -116,12 +119,17 @@ const redirects = [
   { name: 'masks', url: 'https://t.me/addstickers/maskerer' },
   { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
-  { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
+  { name: 'search', url: 'https://www.google.com/search?q=' },
+  { name: 'google', url: 'search/Dennis+Muensterer' },
   { name: 'api', url: 'https://dnnsmnstrr.vercel.app/api/' },
+  { name: 'help', url: 'redirects', aliases: ['available', 'urls', 'list'] },
+  { name: 'playlists', url: 'universe/playlists' }, //extend existing redirects
+  { name: 'insult', url: 'contact?Subject=Fuck%20You%21', aliases: ['hate'] }, //add query params
 ]
 
-const getRedirect = async (route = [], noReturn) => {
+const getRedirect = async (route = [], {noReturn, ...restParams} = {}) => {
   const [ query, ...restRoute] = route
+  console.log('restRoute', restRoute)
   let redirect
   switch (query) {
     case 'random':
@@ -142,8 +150,13 @@ const getRedirect = async (route = [], noReturn) => {
       }
       break
     default:
-      redirect = redirects.find(({name, aliases = []}) => {
-        return name === query || aliases.includes(query)
+      // search for redirect
+      redirect = redirects.find(({name = '', aliases = [], url}) => {
+        if (!name) {
+          console.log('missing name for', url, aliases)
+          return false
+        }
+        return name === query.toLowerCase() || aliases.includes(query)
       })
       if (!redirect) {
         try {
@@ -154,22 +167,48 @@ const getRedirect = async (route = [], noReturn) => {
         }
       }
   }
-  // try a page on my website. if not found, it will redirect back here, therefore the 'noReturn' parameter
-  const fallback = noReturn ? DEFAULT_URL : (DEFAULT_URL + query)
-  return `${redirect && redirect.url ? redirect.url : fallback}${restRoute.reduce((previous, current) => previous + '/' + current, '')}`
+
+
+  return getRedirectURL(redirect, {query, ...restParams}) + restRoute.join('/')
+}
+
+const getRedirectURL = ({url, name}, {query, noReturn, ...restParams} = {}) => {
+  console.log('url', url)
+  console.log('restParams', restParams)
+  const rebuildParams = (params) => {
+    const paramList = Object.keys(params).map((param, index) => `${index === 0 ? '?' : '&'}${param}=${params[param]}`)
+    return paramList.join('')
+  }
+  if (url) return url + rebuildParams(restParams)
+  if (name) {
+    console.log('name', name)
+    return `${DEFAULT_URL}/${name}${restParams ? rebuildParams(restParams) : ''}`
+  }
+  // a failed redirect will end up back here, therefore the 'noReturn' parameter is used to avoid endless loops on redirect attempts
+  const fallback = `${DEFAULT_URL}/${!noReturn && query}`
+  return fallback
 }
 
 export default function handler(req, res) {
   const { slug } = req.query
+  const sortedRedirects = redirects.sort((a, b) => a.name.localeCompare(b.name))
+  const buildList = () => {
+    const listItems = sortedRedirects.map((redirect) => (
+      `<li><a href="${getRedirectURL(redirect)}" title="${redirect.aliases && redirect.aliases.length ? 'Aliases: ' + redirect.aliases.join(', ') : 'No Aliases'}" >${redirect.name}</a></li>`
+    ))
+    return listItems.join('')
+  }
+
   const body = `<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>HTML basics</title>
+        <title>Redirects</title>
     </head>
     <body>
+      <h1>Available Redirects</h1>
       <ul>
-        ${redirects.map((redirect) => '<li><a href="' + redirect.url + '" >' + redirect.name + '</a></li>').join('')}
+        ${buildList()}
       </ul>
     </body>
 </html>`
