@@ -125,11 +125,11 @@ const redirects = [
   { name: 'help', url: 'redirects', aliases: ['available', 'urls', 'list'] },
   { name: 'playlists', url: 'universe/playlists' }, //extend existing redirects
   { name: 'insult', url: 'contact?Subject=Fuck%20You%21', aliases: ['hate'] }, //add query params
+  { name: 'edit', url: 'github/dnnsmnstrr.github.io' }, //shortcut to website repo
 ]
 
 const getRedirect = async (route = [], {noReturn, ...restParams} = {}) => {
   const [ query, ...restRoute] = route
-  console.log('restRoute', restRoute)
   let redirect
   switch (query) {
     case 'random':
@@ -169,24 +169,27 @@ const getRedirect = async (route = [], {noReturn, ...restParams} = {}) => {
   }
 
 
-  return getRedirectURL(redirect, {query, ...restParams}) + restRoute.join('/')
+  return getRedirectURL(redirect, {query, route: restRoute, ...restParams})
 }
 
-const getRedirectURL = ({url, name}, {query, noReturn, ...restParams} = {}) => {
-  console.log('url', url)
-  console.log('restParams', restParams)
+const getRedirectURL = ({url, name}, {route, query, noReturn, ...params} = {}) => {
   const rebuildParams = (params) => {
     const paramList = Object.keys(params).map((param, index) => `${index === 0 ? '?' : '&'}${param}=${params[param]}`)
     return paramList.join('')
   }
-  if (url) return url + rebuildParams(restParams)
-  if (name) {
-    console.log('name', name)
-    return `${DEFAULT_URL}/${name}${restParams ? rebuildParams(restParams) : ''}`
+  let path = route.join('/') + rebuildParams(params)
+  console.log('path', path)
+  console.log('url, name, query', url, name, query)
+  if (url) {
+    path = url + '/' + path
+  } else if (name) {
+    path = `${DEFAULT_URL}/${name}`
+  } else {
+    console.log('query', query)
+    // a failed redirect will end up back here, therefore the 'noReturn' parameter is used to avoid endless loops on redirect attempts
+    path= `${DEFAULT_URL}/${!noReturn ? query : ''}`
   }
-  // a failed redirect will end up back here, therefore the 'noReturn' parameter is used to avoid endless loops on redirect attempts
-  const fallback = `${DEFAULT_URL}/${!noReturn && query}`
-  return fallback
+  return path
 }
 
 export default function handler(req, res) {
