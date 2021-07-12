@@ -168,7 +168,6 @@ const getRedirect = async (route = [], {noReturn, ...restParams} = {}) => {
       }
   }
 
-
   return getRedirectURL(redirect, {query, route: restRoute, ...restParams})
 }
 
@@ -177,14 +176,17 @@ const getRedirectURL = ({url, name}, {route = [], query, noReturn, ...params} = 
     const paramList = Object.keys(params).map((param, index) => `${index === 0 ? '?' : '&'}${param}=${params[param]}`)
     return paramList.join('')
   }
-  let path = route.join('/') + rebuildParams(params)
+  let path = rebuildParams(params)
+  if (route && route.length) {
+    path = route.reduce((previous, current) => previous + '/' + current, '') + path
+  }
   if (url) {
-    path = `${url}${path ? '/' + path : ''}`
+    path = `${url}${path}`
   } else if (name) {
-    path = `${DEFAULT_URL}/${name}${path ? '/' + path : ''}`
+    path = `${DEFAULT_URL}/${name}${path}`
   } else {
     // a failed redirect will end up back here, therefore the 'noReturn' parameter is used to avoid endless loops on redirect attempts
-    path= `${DEFAULT_URL}/${!noReturn ? query : ''}`
+    path = `${DEFAULT_URL}/${!noReturn ? query : ''}`
   }
   return path
 }
