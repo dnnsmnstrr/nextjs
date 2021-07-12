@@ -64,6 +64,11 @@ const redirects = [
     aliases: ['zk', 'zettel', 'notes', 'slipbox', 'knowlege']
   },
   {
+    name: 'dotfiles',
+    url: DEFAULT_URL + 'dotfiles',
+    aliases: ['df', 'setup', 'dot', 'config']
+  },
+  {
     name: 'making',
     url: 'https://www.tiktok.com/@dennis.makerer',
     aliases: ['makerer', 'make', 'maker', 'tiktok', 'tt', 'makermonday']
