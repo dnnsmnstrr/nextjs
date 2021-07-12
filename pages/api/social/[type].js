@@ -1,5 +1,5 @@
 import getSocial from './getSocial'
-import {DEFAULT_URL} from '../redirect/redirects'
+import {DEFAULT_URL} from '../../../config'
 
 export default async (req, res) => {
   const { query: { type } } = req
