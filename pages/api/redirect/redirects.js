@@ -1,16 +1,17 @@
 import getSocial from '../social/getSocial'
 import getPlaylist from '../playlist/getPlaylist'
-
-const DEFAULT_URL = 'https://muensterer.xyz/'
-const USERNAME_SHORT = 'dnnsmnstrr'
-const USERNAME_FULL = 'dennismuensterer'
-const EMAIL = 'dennismuensterer@gmail.com'
+import {
+  DEFAULT_URL,
+  USERNAME: USERNAME_FULL
+  USERNAME_SHORT,
+  EMAIL
+} from '../../../config'
 
 const redirects = [
   {
     name: 'homepage',
     url: DEFAULT_URL,
-    aliases: ['main', 'root']
+    aliases: ['home', 'main', 'root']
   },
   {
     name: 'contact',
@@ -111,8 +112,7 @@ const redirects = [
   { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
   { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
-  { name: 'api', url: 'https://next.muensterer.xyz/api' },
-  { name: 'wg', url: 'https://www.wg-gesucht.de//8616536.html' },
+  { name: 'api', url: 'https://dnnsmnstrr.vercel.app/api/' },
 ]
 
 const getRedirect = async (route = [], noReturn) => {
@@ -172,4 +172,4 @@ export default function handler(req, res) {
   res.end(body, {headers: new Headers({'Content-Type': 'text/html'})})
 }
 
-export {DEFAULT_URL, redirects, getRedirect}
+export { redirects, getRedirect }
