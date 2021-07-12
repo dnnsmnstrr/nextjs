@@ -79,7 +79,7 @@ const redirects = [
   },
   {
     name: 'universe',
-    url: 'https://dnnsmnstrr.onuniverse.com/'
+    url: 'https://dnnsmnstrr.onuniverse.com'
   },
   {
     name: 'felix',
@@ -119,8 +119,7 @@ const redirects = [
   { name: 'masks', url: 'https://t.me/addstickers/maskerer' },
   { name: 'reddit', url: 'https://www.reddit.com/user/themissing_link' },
   { name: 'discord', url: 'https://discord.gg/CrB72mXEzN' },
-  { name: 'search', url: 'https://www.google.com/search?q=' },
-  { name: 'google', url: 'search/Dennis+Muensterer' },
+  { name: 'google', url: 'https://www.google.com/search?q=Dennis+Muensterer' },
   { name: 'api', url: 'https://dnnsmnstrr.vercel.app/api/' },
   { name: 'help', url: 'redirects', aliases: ['available', 'urls', 'list'] },
   { name: 'playlists', url: 'universe/playlists' }, //extend existing redirects
