@@ -172,7 +172,7 @@ const getRedirect = async (route = [], {noReturn, ...restParams} = {}) => {
   return getRedirectURL(redirect, {query, route: restRoute, ...restParams})
 }
 
-const getRedirectURL = ({url, name}, {route, query, noReturn, ...params} = {}) => {
+const getRedirectURL = ({url, name}, {route = [], query, noReturn, ...params} = {}) => {
   const rebuildParams = (params) => {
     const paramList = Object.keys(params).map((param, index) => `${index === 0 ? '?' : '&'}${param}=${params[param]}`)
     return paramList.join('')

@@ -10,15 +10,15 @@ const Home = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <SwaggerUI spec={swagger} />
 
     <main>
+    <SwaggerUI spec={swagger} />
 
       <h1 className="title">
         Welcome to <a href="https://nextjs.org">Next.js!</a>
       </h1>
-      <Link href="/life" as={(process.env.BACKEND_URL || '') + '/life'}>
-        <a>Life</a>
+      <Link href="https://dnnsmnstrr.github.io" as={(process.env.BACKEND_URL || '')}>
+        <a>Homepage</a>
       </Link>
     </main>
 
