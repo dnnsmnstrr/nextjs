@@ -1,9 +1,9 @@
-import {DEFAULT_URL, getRedirect} from './redirects'
+import {getRedirect} from './redirects'
 
 export default async (req, res) => {
   try {
-    const { query: { route, noReturn = false } } = req
-    const Location = await getRedirect(route, noReturn)
+    const { query: { route, ...params } } = req
+    const Location = await getRedirect(route, params)
     res.writeHead(307, { Location } )
     res.end()
   } catch (err) {
