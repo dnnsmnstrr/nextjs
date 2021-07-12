@@ -78,6 +78,11 @@ const redirects = [
     aliases: ['makerer', 'make', 'maker', 'tiktok', 'tt', 'makermonday']
   },
   {
+    name: 'toolshare',
+    url: 'https://toolsharewith.me',
+    aliases: ['tools', 'tool']
+  },
+  {
     name: 'universe',
     url: 'https://dnnsmnstrr.onuniverse.com'
   },
